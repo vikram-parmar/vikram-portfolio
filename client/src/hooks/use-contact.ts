@@ -1,24 +1,52 @@
 import { useMutation } from "@tanstack/react-query";
-import { api, type ContactInput, type ContactResponse } from "@shared/routes";
+import type { ContactInput } from "@shared/routes";
 import { useToast } from "@/hooks/use-toast";
+
+const WEB3FORMS_URL = "https://api.web3forms.com/submit";
 
 export function useContact() {
   const { toast } = useToast();
+  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as string | undefined;
 
-  return useMutation<ContactResponse, Error, ContactInput>({
+  return useMutation<
+    { success: true },
+    Error,
+    ContactInput
+  >({
     mutationFn: async (data: ContactInput) => {
-      const res = await fetch(api.contact.create.path, {
-        method: api.contact.create.method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.message || "Failed to send message. Please try again.");
+      if (!accessKey?.trim()) {
+        throw new Error(
+          "Contact form is not configured. Please set VITE_WEB3FORMS_ACCESS_KEY in .env (get a free key at https://web3forms.com)."
+        );
       }
 
-      return res.json();
+      const res = await fetch(WEB3FORMS_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: data.name,
+          email: data.email,
+          message: data.message,
+          subject: "Portfolio contact",
+        }),
+      });
+
+      const json = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(
+          json.body?.message || json.message || "Failed to send message. Please try again."
+        );
+      }
+
+      if (json.success !== true) {
+        throw new Error(
+          json.body?.message || json.message || "Failed to send message. Please try again."
+        );
+      }
+
+      return { success: true as const };
     },
     onSuccess: () => {
       toast({

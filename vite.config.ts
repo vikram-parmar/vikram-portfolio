@@ -27,14 +27,20 @@ export default defineConfig({
     },
   },
   root: path.resolve(import.meta.dirname, "client"),
+  envDir: path.resolve(import.meta.dirname), // Load .env from project root (not client/)
+  server: {
+    port: parseInt(process.env.PORT || "5000", 10),
+    strictPort: true,
+    host: "0.0.0.0",
+    fs: {
+      strict: true,
+    },
+  },
+  optimizeDeps: {
+    include: ["react", "react-dom", "@tanstack/react-query", "wouter", "framer-motion"],
+  },
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
-  },
-  server: {
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
-    },
   },
 });

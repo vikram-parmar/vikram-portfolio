@@ -47,10 +47,10 @@ export function Hero() {
           className="flex flex-wrap gap-4"
         >
           <a
-            href="#projects"
+            href="/resume"
             className="px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold flex items-center gap-2 hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(0,242,254,0.4)] transition-all duration-300"
           >
-            View Projects
+            Resume
             <ArrowRight className="w-5 h-5" />
           </a>
           <a

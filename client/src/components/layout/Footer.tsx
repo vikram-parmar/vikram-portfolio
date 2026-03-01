@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Linkedin, Mail, Phone } from "lucide-react";
 
 export function Footer() {
   return (
@@ -16,11 +16,11 @@ export function Footer() {
         </p>
 
         <div className="flex gap-4">
-          <a href="https://github.com/vikramparmar385" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 hover:border-primary hover:text-primary transition-all duration-300">
-            <Github className="w-5 h-5" />
-          </a>
-          <a href="https://linkedin.com/in/vikramparmar385" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 hover:border-primary hover:text-primary transition-all duration-300">
+          <a href="https://www.linkedin.com/in/vikram-parmar-5458b316a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 hover:border-primary hover:text-primary transition-all duration-300">
             <Linkedin className="w-5 h-5" />
+          </a>
+          <a href="tel:+916353688399" className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 hover:border-primary hover:text-primary transition-all duration-300" title="+91 6353688399">
+            <Phone className="w-5 h-5" />
           </a>
           <a href="mailto:vikramparmar385@gmail.com" className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 hover:border-primary hover:text-primary transition-all duration-300">
             <Mail className="w-5 h-5" />
