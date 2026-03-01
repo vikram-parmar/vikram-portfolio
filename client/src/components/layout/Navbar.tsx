@@ -29,7 +29,7 @@ export function Navbar() {
         isScrolled ? "bg-background/80 backdrop-blur-lg border-b border-white/10 py-4" : "bg-transparent py-6"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between min-w-0">
         <a href="#" className="flex items-center gap-2 group relative z-50">
           <Code2 className="w-8 h-8 text-primary group-hover:rotate-12 transition-transform duration-300" />
           <span className="font-display font-bold text-xl tracking-wide group-hover:text-primary transition-colors">
@@ -73,18 +73,25 @@ export function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 bg-background/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8"
+            className="fixed inset-0 bg-background/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-6 pt-16 pb-8"
           >
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-2xl font-display font-bold text-muted-foreground hover:text-primary transition-colors"
+                className="text-xl sm:text-2xl font-display font-bold text-muted-foreground hover:text-primary transition-colors py-2"
               >
                 {link.name}
               </a>
             ))}
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mt-4 px-6 py-3 rounded-full text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              Let's Talk
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

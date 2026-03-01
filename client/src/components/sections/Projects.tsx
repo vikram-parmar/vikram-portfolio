@@ -31,19 +31,19 @@ export function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-24 relative z-10">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="projects" className="py-12 sm:py-16 lg:py-24 relative z-10 overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-8 sm:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Selected Projects</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4">Selected Projects</h2>
           <div className="w-20 h-1 bg-primary rounded-full"></div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
           {projects.map((project, idx) => (
             <motion.div
               key={idx}
@@ -69,15 +69,15 @@ export function Projects() {
                   )}
                 </div>
                 
-                <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-sm font-medium text-primary/80 mb-4">{project.type}</p>
-                <p className="text-muted-foreground mb-8 flex-grow">
+                <p className="text-xs sm:text-sm font-medium text-primary/80 mb-3 sm:mb-4">{project.type}</p>
+                <p className="text-muted-foreground text-sm sm:text-base mb-5 sm:mb-8 flex-grow min-w-0">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mt-auto">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-auto">
                   {project.tech.map((tech) => (
                     <span key={tech} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-foreground/80 font-medium">
                       {tech}

@@ -33,52 +33,53 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 relative z-10 bg-background/50">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <section id="contact" className="py-12 sm:py-16 lg:py-24 relative z-10 bg-background/50 overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="min-w-0"
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Let's Connect</h2>
-            <div className="w-20 h-1 bg-primary rounded-full mb-8"></div>
-            <p className="text-lg text-muted-foreground mb-12 max-w-md">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4">Let's Connect</h2>
+            <div className="w-20 h-1 bg-primary rounded-full mb-6 sm:mb-8"></div>
+            <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-12 max-w-md">
               Whether you have a question, a project idea, or just want to say hi, I'll try my best to get back to you!
             </p>
 
-            <div className="space-y-6">
-              <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-colors duration-300">
-                  <Mail className="w-5 h-5" />
+            <div className="space-y-4 sm:space-y-6">
+              <div className="flex items-center gap-3 sm:gap-4 group min-w-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-colors duration-300 flex-shrink-0">
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm text-muted-foreground">Email</p>
-                  <a href="mailto:vikramparmar385@gmail.com" className="text-lg font-medium hover:text-primary transition-colors">
+                  <a href="mailto:vikramparmar385@gmail.com" className="text-sm sm:text-lg font-medium hover:text-primary transition-colors break-all">
                     vikramparmar385@gmail.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-colors duration-300">
-                  <Phone className="w-5 h-5" />
-             </div>
+              <div className="flex items-center gap-3 sm:gap-4 group">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-colors duration-300 flex-shrink-0">
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Phone</p>
-                  <a href="tel:+916353688399" className="text-lg font-medium hover:text-primary transition-colors">
+                  <a href="tel:+916353688399" className="text-sm sm:text-lg font-medium hover:text-primary transition-colors">
                     +91 6353688399
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-colors duration-300">
-                  <MapPin className="w-5 h-5" />
+              <div className="flex items-center gap-3 sm:gap-4 group">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-colors duration-300 flex-shrink-0">
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="text-lg font-medium">Gujarat, India</p>
+                  <p className="text-sm sm:text-lg font-medium">Gujarat, India</p>
                 </div>
               </div>
             </div>
@@ -88,7 +89,7 @@ export function Contact() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="glass-panel p-8 md:p-10 rounded-3xl"
+            className="glass-panel p-5 sm:p-8 md:p-10 rounded-3xl min-w-0"
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div>

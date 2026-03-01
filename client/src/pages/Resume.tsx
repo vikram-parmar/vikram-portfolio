@@ -3,18 +3,9 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { FileText, Download, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
+import { skills, education } from "@shared/profile";
 
 export default function Resume() {
-  const skills = {
-    "Languages": ["PHP", "JavaScript"],
-    "Backend": ["Laravel", "Filament", "Livewire"],
-    "Databases": ["MySQL", "PostgreSQL", "MongoDB"],
-    "Caching & Queues": ["Redis", "Laravel Queues", "Horizon"],
-    "Performance": ["Query tuning", "Indexing", "Read Replicas", "Laravel Octane"],
-    "DevOps": ["Docker", "AWS (EC2, RDS, S3)"],
-    "Version Control": ["Git", "GitHub", "GitLab"]
-  };
-
   const experience = [
     {
       company: "Vivansh Infotech",
@@ -44,12 +35,6 @@ export default function Resume() {
     }
   ];
 
-  const education = {
-    degree: "Bachelor of Engineering",
-    year: "2022",
-    institution: "Gujarat Technological University"
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -71,7 +56,9 @@ export default function Resume() {
             
             <a 
               href="/resume.pdf" 
+              download="Vikram_Parmar_Software_Developer_Resume.pdf"
               target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full font-semibold hover-elevate transition-all"
             >
               <Download className="w-4 h-4" />
