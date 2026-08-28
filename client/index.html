@@ -128,29 +128,12 @@
     </script>
   </head>
   <body>
+    <!--
+      #root is not empty in the served HTML: the build injects a readable text
+      version of the page here (see script/seo-fallback.ts) so crawlers, AI
+      assistants and no-JS browsers get real content. React replaces it on mount.
+    -->
     <div id="root"></div>
-
-    <noscript>
-      <h1>Vikram Parmar — Senior Backend Developer</h1>
-      <p>Gujarat, India — open to remote (global, async-friendly). Contact: vikramparmar385@gmail.com, +91 6353688399.</p>
-      <p>
-        Backend-focused engineer with 4.5+ years of experience building and scaling production systems using Laravel and PHP,
-        on platforms serving 50k+ users. Led a cross-functional team of 6 developers spanning backend, frontend, mobile and
-        AI/ML on a multi-service production platform. Strong in REST API design, multi-tenant architecture, database
-        optimization at scale, and distributed system design — sharding, read replicas, caching strategy and failover — for
-        systems handling 1M+ requests.
-      </p>
-      <h2>Experience</h2>
-      <p><strong>Vivansh Infotech</strong> — Software Developer (Backend), Ahmedabad, India (Oct 2023 – Present). REST APIs in Laravel; Redis caching and queue-based processing cutting API response time ~35%; Horizon/Supervisor job pipelines at ~99% reliability; test-gated CI/CD; mentored 2 developers.</p>
-      <p><strong>eSparkBiz</strong> — Software Developer, Ahmedabad, India (Jan 2022 – Oct 2023). Backend systems in Laravel/MySQL; integrated Stripe, Callpay, Clover and VALR payment gateways; hardened financial transaction workflows.</p>
-      <h2>Key projects</h2>
-      <p>Capability — training &amp; workforce platform, 50k+ users, team lead of 6. Letting a Property — UK property management platform. CHARGD, Yaalago, Lifesthought, Seedlr, One For All Social.</p>
-      <h2>Skills</h2>
-      <p>PHP, JavaScript, Laravel, Filament, Livewire, Laravel Octane, MySQL, PostgreSQL, MongoDB, Redis, Horizon, Supervisor, multi-tenant architecture, query optimization, read replicas, DB replication &amp; failover, event-driven design, Cloudflare rate limiting, test-gated CI/CD, Sentry, Nightwatch, FastAPI, Docker, Laravel Forge, Laravel Sail, AWS (EC2, RDS, S3), Git, GitHub, GitLab.</p>
-      <h2>Education</h2>
-      <p>Bachelor of Engineering, Gujarat Technological University, 2022.</p>
-      <p><a href="/resume">Full résumé</a> · <a href="/resume.pdf">Download résumé (PDF)</a></p>
-    </noscript>
 
     <script type="module" src="/src/main.tsx"></script>
   </body>
