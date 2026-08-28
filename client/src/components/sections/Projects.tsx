@@ -1,92 +1,130 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Layers, Users } from "lucide-react";
+import { identity, featuredProjects, additionalProjects } from "@shared/profile";
 
 export function Projects() {
-  const projects = [
-    {
-      title: "Capability",
-      type: "Training & Workforce Platform",
-      description: "A robust platform serving 50k+ users. Architected scalable backend solutions to handle heavy concurrent usage and complex data relationships.",
-      tech: ["Laravel", "PostgreSQL", "Redis", "Queues"],
-      metric: "50k+ Users"
-    },
-    {
-      title: "Letting a Property",
-      type: "Property Management",
-      description: "UK-Based platform streamlining property management, tenant onboarding, and automated document processing systems.",
-      tech: ["PHP", "Laravel", "MySQL", "AWS"],
-    },
-    {
-      title: "Seedlr",
-      type: "Crypto Gifting Platform",
-      description: "A South African platform enabling users to gift cryptocurrency. Handled secure transactions and third-party API integrations.",
-      tech: ["Laravel", "Web3 APIs", "MySQL", "Queue Workers"],
-    },
-    {
-      title: "One For All Social",
-      type: "Social Media Management",
-      description: "A comprehensive dashboard for managing multiple social media accounts, built with modern reactive backend tools.",
-      tech: ["Laravel", "Filament", "Livewire", "PostgreSQL"],
-    }
-  ];
-
   return (
-    <section id="projects" className="py-12 sm:py-16 lg:py-24 relative z-10 overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-8 sm:mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4">Selected Projects</h2>
-          <div className="w-20 h-1 bg-primary rounded-full"></div>
-        </motion.div>
+    <section id="work" className="shell scroll-mt-16 pb-8 pt-24 sm:pt-28">
+      <div className="mb-12 flex items-baseline justify-between gap-8">
+        <h2 className="cmd !text-[clamp(1.05rem,2vw,1.4rem)] !text-foreground">
+          ls selected-work/
+        </h2>
+        <span className="font-mono text-[12px] text-muted-foreground">
+          {`${featuredProjects.length} dirs`}
+        </span>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
-          {projects.map((project, idx) => (
+      {featuredProjects.map((project, idx) => (
+        <motion.article
+          key={project.title}
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45 }}
+          className="grid gap-8 border-t border-dashed border-border py-12 md:grid-cols-[280px_1fr] md:gap-14"
+        >
+          <div>
+            <div className="font-mono text-[11px] uppercase tracking-[0.07em] text-primary">
+              {project.kicker}
+            </div>
+            <h3 className="mt-4 text-xl font-bold tracking-[-0.01em]">
+              <span className="text-accent">{String(idx + 1).padStart(2, "0")}/ </span>
+              {project.title}
+            </h3>
+            <p className="mt-2 font-mono text-[13px] leading-snug text-muted-foreground">
+              {project.subtitle}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-1.5">
+              {project.tech.map((t) => (
+                <span
+                  key={t}
+                  className="border border-border px-2 py-1 font-mono text-[11px] text-muted-foreground"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="prose-serif max-w-[62ch] text-[1.15rem] leading-[1.6] text-foreground/85">
+              {project.summary}
+            </p>
+
+            <div className="mt-8 grid gap-3.5">
+              {project.points.map((point, i) => (
+                <div
+                  key={i}
+                  className="grid grid-cols-[18px_1fr] gap-3 font-mono text-[13.5px] leading-[1.6] text-muted-foreground"
+                >
+                  <span className="pt-0.5 text-accent">&rarr;</span>
+                  <span className="prose-serif">{point}</span>
+                </div>
+              ))}
+            </div>
+
+            {project.metrics.length > 0 && (
+              <div className="mt-9 grid grid-cols-3 gap-px border border-border bg-border">
+                {project.metrics.map((m) => (
+                  <div key={m.label} className="bg-background px-4 py-5">
+                    <div className="text-xl font-bold tracking-[-0.02em] text-primary">
+                      {m.value}
+                    </div>
+                    <div className="mono-label mt-2 lowercase">{m.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </motion.article>
+      ))}
+
+      <div className="mt-6 border-t border-dashed border-border pt-12">
+        <div className="mb-10 flex items-baseline justify-between gap-8">
+          <h3 className="cmd !text-[clamp(0.95rem,1.8vw,1.2rem)] !text-foreground">
+            ls also-shipped/
+          </h3>
+          <span className="font-mono text-[12px] text-muted-foreground">
+            parallel engagements
+          </span>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {additionalProjects.map((project, idx) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              key={project.title}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="group relative"
+              transition={{ delay: idx * 0.05 }}
+              className="flex flex-col gap-3 border border-border p-5 transition-colors hover:border-primary/50 hover:bg-card/60"
             >
-              {/* Hover Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
-              
-              <div className="relative z-10 h-full glass-panel p-8 rounded-2xl border-white/10 group-hover:border-primary/50 transition-colors flex flex-col">
-                <div className="flex justify-between items-start mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                    <Layers className="w-6 h-6 text-primary" />
-                  </div>
-                  {project.metric && (
-                    <span className="flex items-center gap-1.5 text-xs font-medium text-primary bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20">
-                      <Users className="w-3.5 h-3.5" />
-                      {project.metric}
-                    </span>
-                  )}
-                </div>
-                
-                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+              <div className="flex items-baseline justify-between gap-3">
+                <h4 className="font-bold tracking-[-0.01em]">
+                  <span className="text-accent">$ </span>
                   {project.title}
-                </h3>
-                <p className="text-xs sm:text-sm font-medium text-primary/80 mb-3 sm:mb-4">{project.type}</p>
-                <p className="text-muted-foreground text-sm sm:text-base mb-5 sm:mb-8 flex-grow min-w-0">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-auto">
-                  {project.tech.map((tech) => (
-                    <span key={tech} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-foreground/80 font-medium">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                </h4>
+                <span className="font-mono text-[10.5px] text-primary">{project.tag}</span>
+              </div>
+              <p className="prose-serif text-[14px] leading-[1.55] text-muted-foreground">
+                {project.description}
+              </p>
+              <div className="mt-auto pt-2 font-mono text-[11px] text-muted-foreground/70">
+                {project.stack}
               </div>
             </motion.div>
           ))}
+
+          <div className="flex flex-col justify-center gap-2 border border-dashed border-border p-5">
+            <p className="prose-serif text-[15px] leading-snug text-muted-foreground">
+              Happy to walk through any of these in detail.
+            </p>
+            <a
+              href={`mailto:${identity.email}`}
+              className="w-fit font-mono text-[12.5px] text-primary link-underline"
+            >
+              ask_me &rarr;
+            </a>
+          </div>
         </div>
       </div>
     </section>

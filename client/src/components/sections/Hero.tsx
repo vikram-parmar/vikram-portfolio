@@ -1,101 +1,123 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Terminal } from "lucide-react";
+import { identity, summary } from "@shared/profile";
+
+const fade = {
+  initial: { opacity: 0, y: 14 },
+  animate: { opacity: 1, y: 0 },
+};
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 overflow-x-hidden overflow-y-auto">
-      {/* Background Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob"></div>
-      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-accent/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 w-full min-w-0">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 sm:gap-8 md:gap-10 lg:gap-16">
-          {/* Left: intro content */}
-          <div className="flex-1">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-panel mb-8 border-primary/30"
-            >
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-              <span className="text-sm font-medium text-primary">Available for new opportunities</span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-extrabold leading-tight mb-4 sm:mb-6"
-            >
-              Hi, I'm <br className="hidden md:block" />
-              <span className="gradient-text">Vikram Parmar.</span>
-            </motion.h1>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="max-w-2xl mb-6 sm:mb-10"
-            >
-              <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                Senior Backend Developer engineering robust, scalable systems and APIs that power modern web applications.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="flex flex-wrap gap-3 sm:gap-4"
-            >
-              <a
-                href="/resume"
-                className="px-6 py-3 sm:px-8 sm:py-4 rounded-xl bg-primary text-primary-foreground font-semibold flex items-center gap-2 hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(0,242,254,0.4)] transition-all duration-300 text-sm sm:text-base"
-              >
-                Resume
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-              </a>
-              <a
-                href="#contact"
-                className="px-6 py-3 sm:px-8 sm:py-4 rounded-xl glass-panel font-semibold flex items-center gap-2 hover:border-primary/50 hover:text-primary transition-all duration-300 text-sm sm:text-base"
-              >
-                <Terminal className="w-5 h-5" />
-                Contact Me
-              </a>
-            </motion.div>
-          </div>
-
-          {/* Right: profile image – portrait frame (desktop) / above content (mobile) */}
+    <section id="top" className="shell pb-20 pt-16 sm:pb-24 sm:pt-24">
+      <div className="grid gap-12 md:grid-cols-[1fr_auto] md:items-center md:gap-16">
+        <div className="min-w-0">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex-shrink-0 order-first md:order-none flex justify-center md:justify-end"
+            {...fade}
+            transition={{ duration: 0.45 }}
+            className="mb-8 flex items-center gap-2.5 font-mono text-[12px] tracking-[0.04em] text-accent"
           >
-            <div className="relative">
-              {/* Soft glow behind frame */}
-              <div className="absolute -inset-2 rounded-[1.75rem] bg-primary/10 blur-xl" />
-              <img
-                src="/profile.png"
-                alt="Vikram Parmar"
-                className="relative w-44 sm:w-56 md:w-72 lg:w-80 aspect-[3/4] rounded-2xl object-cover object-top border border-white/20 shadow-[0_0_30px_rgba(0,242,254,0.12),0_25px_50px_-12px_rgba(0,0,0,0.4)] max-w-[85vw]"
-              />
-            </div>
+            <span className="relative flex h-[7px] w-[7px]">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+              <span className="relative inline-flex h-[7px] w-[7px] rounded-full bg-accent" />
+            </span>
+            {identity.availability}
+          </motion.div>
+
+          <motion.div
+            {...fade}
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="mb-4 font-mono text-[13px] text-muted-foreground"
+          >
+            <span className="text-accent">vikram@portfolio</span>
+            <span className="text-muted-foreground">:</span>
+            <span className="text-primary">~</span>
+            <span className="text-muted-foreground">$ </span>
+            whoami
+          </motion.div>
+
+          <motion.h1
+            {...fade}
+            transition={{ duration: 0.55, delay: 0.1 }}
+            className="cursor max-w-[16ch] text-[clamp(2.4rem,5.6vw,4.4rem)] font-bold leading-[1.05] tracking-[-0.02em] text-foreground"
+          >
+            Senior backend developer.
+          </motion.h1>
+
+          <motion.p
+            {...fade}
+            transition={{ duration: 0.55, delay: 0.16 }}
+            className="comment prose-serif mt-7 max-w-[58ch] text-[clamp(1rem,1.7vw,1.2rem)] leading-[1.6] text-muted-foreground"
+          >
+            {summary.lead}
+          </motion.p>
+
+          <motion.p
+            {...fade}
+            transition={{ duration: 0.55, delay: 0.22 }}
+            className="comment prose-serif mt-3 max-w-[56ch] text-[0.98rem] leading-[1.6] text-muted-foreground/80"
+          >
+            {summary.sub}
+          </motion.p>
+
+          <motion.div
+            {...fade}
+            transition={{ duration: 0.55, delay: 0.28 }}
+            className="mt-10 flex flex-wrap items-center gap-3 font-mono text-[13px]"
+          >
+            <a
+              href="/#work"
+              className="bg-primary px-6 py-3 font-medium text-primary-foreground transition-shadow hover:shadow-[0_0_24px_-4px_hsl(var(--primary)/0.6)]"
+            >
+              see_selected_work
+            </a>
+            <a
+              href="/resume"
+              className="border border-border px-6 py-3 text-foreground/90 transition-colors hover:border-primary hover:text-primary"
+            >
+              cat resume.pdf
+            </a>
+            <span className="ml-1 text-muted-foreground">
+              # {identity.location} · {identity.timezone}
+            </span>
           </motion.div>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <span className="text-xs text-muted-foreground uppercase tracking-widest">Scroll</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent"></div>
-      </motion.div>
+        <motion.figure
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.55, delay: 0.15 }}
+          className="group order-first mx-auto w-44 shrink-0 sm:w-52 md:order-none md:mx-0 md:w-60"
+        >
+          <div className="relative border border-border p-1.5 transition-colors duration-300 group-hover:border-primary/60">
+            <span className="absolute -left-px -top-px h-3 w-3 border-l border-t border-primary transition-all duration-300 group-hover:h-4 group-hover:w-4" />
+            <span className="absolute -bottom-px -right-px h-3 w-3 border-b border-r border-primary transition-all duration-300 group-hover:h-4 group-hover:w-4" />
+            <div className="relative overflow-hidden">
+              <img
+                src="/profile.png"
+                alt={identity.name}
+                className="aspect-[3/4] w-full object-cover object-top grayscale contrast-[1.05] transition-[filter] duration-500 ease-out group-hover:grayscale-0 group-hover:contrast-100 motion-reduce:transition-none"
+              />
+              {/* CRT scanlines at rest — clear on hover */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 opacity-40 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(0deg, rgba(0,0,0,0.5) 0 1px, transparent 1px 3px)",
+                }}
+              />
+              <div className="pointer-events-none absolute inset-0 opacity-0 shadow-[inset_0_0_40px_-8px_hsl(var(--primary)/0.5)] transition-opacity duration-500 group-hover:opacity-100" />
+            </div>
+          </div>
+          <figcaption className="mt-2.5 font-mono text-[11px] tracking-[0.04em] text-muted-foreground">
+            <span className="text-accent"># </span>vikram_parmar.png
+            <span className="text-muted-foreground/50 transition-colors duration-300 group-hover:text-accent">
+              {" "}
+              --render color
+            </span>
+          </figcaption>
+        </motion.figure>
+      </div>
     </section>
   );
 }

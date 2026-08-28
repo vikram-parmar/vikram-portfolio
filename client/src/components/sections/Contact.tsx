@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useContact } from "@/hooks/use-contact";
+import { identity } from "@shared/profile";
 
-// Define a client-side schema matching the backend requirements
 const contactSchema = z.object({
   name: z.string().min(2, "Name is required"),
   email: z.string().email("Invalid email address"),
@@ -14,136 +13,108 @@ const contactSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
+const fieldClass =
+  "w-full border-0 border-b border-border bg-transparent px-0 py-2.5 font-mono text-[14px] text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none focus:ring-0 transition-colors";
+
 export function Contact() {
   const { mutate: sendMessage, isPending } = useContact();
-
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-  });
+  } = useForm<ContactFormData>({ resolver: zodResolver(contactSchema) });
 
-  const onSubmit = (data: ContactFormData) => {
-    sendMessage(data, {
-      onSuccess: () => reset(),
-    });
-  };
+  const onSubmit = (data: ContactFormData) =>
+    sendMessage(data, { onSuccess: () => reset() });
 
   return (
-    <section id="contact" className="py-12 sm:py-16 lg:py-24 relative z-10 bg-background/50 overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="min-w-0"
-          >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4">Let's Connect</h2>
-            <div className="w-20 h-1 bg-primary rounded-full mb-6 sm:mb-8"></div>
-            <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-12 max-w-md">
-              Whether you have a question, a project idea, or just want to say hi, I'll try my best to get back to you!
+    <section id="contact" className="scroll-mt-16 border-t border-dashed border-border">
+      <div className="shell py-24 sm:py-28">
+        <div className="grid gap-14 lg:grid-cols-[1fr_minmax(0,400px)] lg:gap-20">
+          <div>
+            <div className="cmd mb-6">./contact --now</div>
+            <h2 className="max-w-[24ch] text-[clamp(1.8rem,4.2vw,3.1rem)] font-bold leading-[1.1] tracking-[-0.02em]">
+              Looking for a backend engineer who owns the system, not just the ticket.
+            </h2>
+            <p className="prose-serif mt-7 max-w-[54ch] text-[clamp(1rem,1.8vw,1.25rem)] leading-[1.6] text-muted-foreground">
+              Open to senior backend and platform roles — remote, global,
+              async-friendly. Available for a conversation this week.
             </p>
 
-            <div className="space-y-4 sm:space-y-6">
-              <div className="flex items-center gap-3 sm:gap-4 group min-w-0">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-colors duration-300 flex-shrink-0">
-                  <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-sm text-muted-foreground">Email</p>
-                  <a href="mailto:vikramparmar385@gmail.com" className="text-sm sm:text-lg font-medium hover:text-primary transition-colors break-all">
-                    vikramparmar385@gmail.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 sm:gap-4 group">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-colors duration-300 flex-shrink-0">
-                  <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Phone</p>
-                  <a href="tel:+916353688399" className="text-sm sm:text-lg font-medium hover:text-primary transition-colors">
-                    +91 6353688399
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 sm:gap-4 group">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-background transition-colors duration-300 flex-shrink-0">
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="text-sm sm:text-lg font-medium">Gujarat, India</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="glass-panel p-5 sm:p-8 md:p-10 rounded-3xl min-w-0"
-          >
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-2">
-                  Name
-                </label>
-                <input
-                  {...register("name")}
-                  id="name"
-                  type="text"
-                  className="w-full bg-background border border-white/10 rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300"
-                  placeholder="John Doe"
-                />
-                {errors.name && <p className="text-destructive text-sm mt-1.5">{errors.name.message}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-muted-foreground mb-2">
-                  Email
-                </label>
-                <input
-                  {...register("email")}
-                  id="email"
-                  type="email"
-                  className="w-full bg-background border border-white/10 rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300"
-                  placeholder="john@example.com"
-                />
-                {errors.email && <p className="text-destructive text-sm mt-1.5">{errors.email.message}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-muted-foreground mb-2">
-                  Message
-                </label>
-                <textarea
-                  {...register("message")}
-                  id="message"
-                  rows={4}
-                  className="w-full bg-background border border-white/10 rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-300 resize-none"
-                  placeholder="Tell me about your project..."
-                />
-                {errors.message && <p className="text-destructive text-sm mt-1.5">{errors.message.message}</p>}
-              </div>
-
-              <button
-                type="submit"
-                disabled={isPending}
-                className="w-full px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold flex items-center justify-center gap-2 hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(0,242,254,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 group"
+            <div className="mt-10 flex flex-wrap items-center gap-3 font-mono text-[13px]">
+              <a
+                href={`mailto:${identity.email}`}
+                className="bg-primary px-6 py-3.5 font-medium text-primary-foreground transition-shadow hover:shadow-[0_0_24px_-4px_hsl(var(--primary)/0.6)]"
               >
-                {isPending ? "Sending..." : "Send Message"}
-                {!isPending && <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
-              </button>
-            </form>
-          </motion.div>
+                {identity.email}
+              </a>
+              <a
+                href={identity.phoneHref}
+                className="border border-border px-6 py-3.5 text-foreground/90 transition-colors hover:border-primary hover:text-primary"
+              >
+                {identity.phone}
+              </a>
+              <a
+                href={identity.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="border border-border px-6 py-3.5 text-foreground/90 transition-colors hover:border-primary hover:text-primary"
+              >
+                linkedin
+              </a>
+            </div>
+          </div>
+
+          <motion.form
+            onSubmit={handleSubmit(onSubmit)}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-7 border border-border bg-card/60 p-6 sm:p-8"
+          >
+            <div className="mono-label lowercase">{"// or send a message"}</div>
+            <div>
+              <label htmlFor="c-name" className="font-mono text-[12px] text-muted-foreground">
+                name:
+              </label>
+              <input id="c-name" {...register("name")} type="text" placeholder="jane_doe" className={fieldClass} />
+              {errors.name && (
+                <p className="mt-1.5 font-mono text-[12px] text-destructive">{errors.name.message}</p>
+              )}
+            </div>
+            <div>
+              <label htmlFor="c-email" className="font-mono text-[12px] text-muted-foreground">
+                email:
+              </label>
+              <input id="c-email" {...register("email")} type="email" placeholder="jane@company.com" className={fieldClass} />
+              {errors.email && (
+                <p className="mt-1.5 font-mono text-[12px] text-destructive">{errors.email.message}</p>
+              )}
+            </div>
+            <div>
+              <label htmlFor="c-msg" className="font-mono text-[12px] text-muted-foreground">
+                message:
+              </label>
+              <textarea
+                id="c-msg"
+                {...register("message")}
+                rows={4}
+                placeholder="what are you building?"
+                className={`${fieldClass} resize-none`}
+              />
+              {errors.message && (
+                <p className="mt-1.5 font-mono text-[12px] text-destructive">{errors.message.message}</p>
+              )}
+            </div>
+            <button
+              type="submit"
+              disabled={isPending}
+              className="w-full bg-primary px-6 py-3 font-mono text-[13px] font-medium text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
+            >
+              {isPending ? "sending…" : "send_message"}
+            </button>
+          </motion.form>
         </div>
       </div>
     </section>
